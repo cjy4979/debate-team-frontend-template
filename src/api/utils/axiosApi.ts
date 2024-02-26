@@ -28,7 +28,7 @@ export interface Result {
 
 export interface ResultData<T = any> extends Result {
   access: string
-  data?: T
+  data: T
 }
 
 export const checkStatus = (status: number): void => {

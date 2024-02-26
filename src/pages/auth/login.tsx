@@ -1,4 +1,5 @@
 import { Login } from '@/api/auth/auth'
+import { TeamLogo, teamInfo } from '@/common/setupInfo'
 import { signIn } from '@/reduxFeatures/authSlice'
 import { useAppDispatch, useAppSelector } from '@/reduxFeatures/hooks'
 import { Button, Checkbox, Form, Input, Typography, message } from 'antd'
@@ -37,6 +38,14 @@ const LoginPage = () => {
     const requestBody = { username, password }
     // 登录逻辑
     const response = await Login(requestBody)
+    if (!response || !response.success) {
+      message.error('登录出错，请重试')
+      return
+    }
+    if (response.msg !== 'ok') {
+      message.error('账号或密码错误')
+      return
+    }
     const { sessionId, id, role } = response!.data!
 
     signInDispatch(signIn({ id, sessionId, username, role }))
@@ -59,11 +68,18 @@ const LoginPage = () => {
   }
 
   return (
-    <div className=" w-full h-screen flex justify-center items-center bg-sky-100">
-      <div className=" w-[1000px] h-[600px] flex justify-between bg-sky-100 shadow-lg rounded-3xl overflow-hidden">
+    <div className=" w-full h-screen flex justify-center items-center bg-[#fff5ff]">
+      <div className=" w-[1000px] h-[600px] flex justify-between bg-[#ffeff9] shadow-lg rounded-3xl overflow-hidden">
         {/* left-info card */}
-        <div className=" w-[500px] h-full shadow-md relative flex items-center justify-center">
-          <div></div>
+        <div className=" w-[500px] h-full shadow-md relative flex items-center justify-center overflow-hidden">
+          <div className=" absolute w-[500px] h-[500px] rounded-[50%] bottom-[-48%] left-[-55%] shadow-inner"></div>
+          <div className="absolute w-[300px] h-[300px] rounded-[50%] top-[-25%] left-[65%] shadow-inner rotate-180"></div>
+          <div className="flex flex-col justify-center items-center">
+            <Typography.Title level={3} className=" text-center">
+              {teamInfo.teamName}
+            </Typography.Title>
+            <TeamLogo />
+          </div>
         </div>
         {/* right-login card */}
         <div className="w-[500px] h-[600px] flex items-center justify-center">
@@ -77,19 +93,20 @@ const LoginPage = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <Typography.Title level={2} className=" text-center">
-              Login
+            <Typography.Title level={4} className=" text-center">
+              登录
             </Typography.Title>
+
             <Form.Item
-              label="Username"
+              label="账号"
               name="username"
-              rules={[{ required: true, message: '请输入用户名!' }]}
+              rules={[{ required: true, message: '请输入账号!' }]}
             >
               <Input className="input" />
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label="密码"
               name="password"
               rules={[{ required: true, message: '请输入密码!' }]}
             >
@@ -99,12 +116,12 @@ const LoginPage = () => {
             <Form.Item
               name="remember"
               valuePropName="checked"
-              wrapperCol={{ offset: 8, span: 16 }}
+              wrapperCol={{ offset: 4, span: 16 }}
             >
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox>记住密码</Checkbox>
             </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
               <Button type="primary" danger htmlType="submit">
                 登录
               </Button>

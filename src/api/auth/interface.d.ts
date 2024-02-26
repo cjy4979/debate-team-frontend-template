@@ -15,11 +15,17 @@ export namespace IAuth {
     password: string
   }
 
+  export interface AuthSearchUserRequest {
+    username: string
+  }
+
   export interface AuthSignOutRequest {
     id: string
   }
 
-  export interface AuthSignUpResponse {}
+  export interface AuthSignUpResponse {
+    id: string
+  }
 
   export interface AuthSignInResponse {
     id: string
