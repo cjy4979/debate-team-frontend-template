@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export const teamInfo = {
   beian: '#', //备案号，！！！！！！必须！！！！！！！
-  teamName: '宫商角徵羽' //队伍名称
+  teamName: 'XX辩论队' //队伍名称
 }
 
 export const TeamLogo = () => {
