@@ -8,6 +8,8 @@ const nextConfig = {
     'rc-pagination',
     'rc-picker',
     'rc-util',
+    'rc-tree',
+    'rc-table',
     'antd'
   ],
   webpack: (config, { isServer, webpack, dev }) => {

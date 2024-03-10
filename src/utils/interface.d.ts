@@ -46,7 +46,7 @@ export namespace Statistics {
     season: string
     other: string | null
 
-    _id: React.Key
+    id: React.Key
     children?: DataSourceType[]
   }
 

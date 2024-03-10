@@ -8,3 +8,9 @@ export const teamInfo = {
 export const TeamLogo = () => {
   return <Image src="/logo.png" alt="logo" priority width={100} height={100} />
 }
+
+export const TeamBanner = () => {
+  return (
+    <Image src="/banner.jpg" alt="banner" priority width={160} height={64} />
+  )
+}
